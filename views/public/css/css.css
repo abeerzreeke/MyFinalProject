@@ -1,0 +1,1022 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: NotoKufiArabic-Bold;
+    src: url("../../fonts/NotoKufiArabic-Bold.ttf")
+}
+
+@font-face {
+    font-family: NotoKufiArabic-Regular;
+    src: url("../../fonts/NotoKufiArabic-Bold.ttf")
+}
+
+html, body {
+    margin: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: lightblue !important;
+    font-family: NotoKufiArabic-Bold;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+body.zoo-bg {
+    position: relative;
+}
+
+body.zoo-bg::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url(../../imgs/background1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /* filter: grayscale(100%); */
+}
+
+body.zoo-bg.ingame::before {
+    filter: grayscale(75%);
+}
+
+.app_header {
+    position: relative;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    background: #00000010;
+    padding: 0 25px;
+    margin: 0;
+    border-radius: 0;
+}
+
+.app_header .back {
+    display: none;
+    float: left;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.app_header .back img {
+    display: none;
+    width: 100px;
+    height: 100px;
+    border: 2px solid;
+    border-radius: 50%;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.app_header .back.games,
+.app_header .back.tables,
+.app_header .back.games img[back-to="games"],
+.app_header .back.tables img[back-to="tables"] {
+    display: block;
+}
+
+.app_header .profile {
+    float: left;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.app_header .profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+.app_header .profile .profile_points {
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+    background: #ffffff9c;
+    margin: 5px auto;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.app_header .profile #reset_current_profile {
+    background: white;
+    padding: 7px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    float: right;
+    color: red;
+}
+
+.points_progress {
+    width: 0;
+    height: 7px;
+    background: #8BC34A;
+    border-radius: 10px;
+    margin: 3px auto;
+}
+
+.app_header .profile .profile_points:before {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background: #ffd044;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    content: '';
+    border: 2px solid #FFEB3B;
+}
+
+.app_header .main {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    cursor: pointer;
+    padding: 5px;
+    right: calc(100vw / 2 + -150px);
+    animation: bg 1.25s cubic-bezier(0.19, 1, 0.22, 1) 1;
+    animation-play-state: paused;
+}
+
+.app_header .main:hover {
+    animation-play-state: running;
+}
+
+.app_header .main img {
+    width: 100%;
+    height: 100%;
+}
+
+.app_header .admin {
+    float: right;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.app_header .admin img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid;
+    border-radius: 50%;
+    margin-top: 15px;
+    padding: 5px;
+}
+
+.app_content {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 150px);
+    background: #00000010;
+}
+
+.profile_images {
+    display: none;
+    position: absolute;
+    top: 33%;
+    right: 33%;
+    z-index: 1041;
+    width: 33%;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 20px rgba(145,145,145,1);
+}
+
+.profile_images .closediv {
+    color: black;
+}
+
+.album {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    padding: 0 15px;
+}
+
+.album .cont {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.album .cont .picture {
+    width: 100%;
+    height: 100%;
+}
+
+.album .cont .points {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: #00ffff7a;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+/* New css */
+
+.functions {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.functions .function {
+    position: absolute;
+    z-index: 9;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    background: #ffffffc9;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.functions .function:hover {
+    background: white;
+    border: 3px solid #00000080;
+}
+
+.functions .tables {
+    top: calc(100vh / 2 - 150px);
+    right: calc(100vw / 2 - 450px);
+    border-radius: 10px;
+}
+
+.functions .games {
+    top: calc(100vh / 2 - 150px);
+    left: calc(100vw / 2 - 450px);
+    border-radius: 10px;
+}
+
+.function img {
+    width: 100%;
+    height: 100%;
+}
+
+.abeer{
+     
+       width: 21%;
+       padding: -5px 0;
+       margin: 10px 40%;
+       cursor: pointer;
+       border: 2px solid black;
+       border-radius: 50%;
+       transition: transform .8s ease-in-out;
+       margin-top: -16%;
+}
+
+.abeer:hover {
+    transform: rotate(360deg);
+}
+
+.signIn, .permissions {
+    width: 50%;
+    height: 95%;
+    margin: 0 auto;
+    padding: 10% 0;
+    background: #FFFFFF7f;
+    overflow: hidden;
+}
+
+.signIn form,
+.permissions form {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.signIn input {
+    border: none;
+    border-radius: 10px;
+    padding: 21px 77px;
+    width: 80%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 44px;
+    margin-top: 2px;
+}
+
+.signIn p {
+    font-size: 20px;
+    padding: 0 50px;
+    margin: 0 0 10px;
+}
+
+.signIn p.toggle_password {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.signIn button {
+    width: 20%;
+    border: black;
+    border-radius: 10px;
+    padding: 10px 0;
+    margin: 10px 40%;
+    cursor: pointer;
+    font-size: 30px;
+    color: #fb3c3c;
+    border: 2px solid black;
+}
+
+.permissions {
+    display: none;
+    padding: 10px;
+}
+
+.permissions .method {
+    padding: 0 25px;
+    width: 100%;
+    max-height: calc(100vh - 270px);
+    overflow-y: auto;
+}
+
+.permissions .method span {
+    display: block;
+}
+
+.permissions input, .permissions select {
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 3px;
+    margin: 1px 0;
+    background: white;
+}
+
+.permissions input.invalid {
+    border: 1px solid red;
+}
+
+.permissions input.insert,.permissions input.update, .form_field input.update{
+    width: 50%;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 13px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6px;
+    font-weight: bold;
+}
+
+.permissions input.update, .form_field input.update{
+    background: rgb(213, 17, 213); 
+   
+}
+
+.permissions input.insert{
+    background: rgb(17, 213, 42);
+
+}
+
+
+.form_field p {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px auto 0;
+    padding: 0 10px;
+}
+
+.permissions .method button {
+    width: 20%;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 0;
+    margin: 5px 40%;
+    cursor: pointer;
+}
+
+.permissions .methods_ul {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    border-bottom: 1px solid;
+    padding: 10px 0;
+}
+
+.permissions .methods_ul li {
+    display: table-cell;
+    text-align: center;
+}
+
+.permissions .methods_ul li a {
+    color: black;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.permissions .methods_ul li a[aria-expanded="true"] {
+    padding: 0 15px;
+}
+
+.permissions .accordion {
+    width: 100%;
+}
+
+.permissions .delete_preview {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.permissions .delete_preview img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.edit_element,
+.delete_element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.edit_element .close,
+.delete_element .close {
+    color: black;
+    text-shadow: none;
+    background: white;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+    opacity: 1;
+    padding: 10px;
+}
+
+.edit_element .form_field_group {
+    width: 50%;
+    height: calc(80%);
+    margin: 5% auto;
+    padding: 10px 25px 0;
+    background: #484848;
+    color: white;
+    border-radius: 15px;
+    overflow-y: auto;
+}
+
+.edit_element .form_field_group .form_field {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    background: #00ff002a;
+}
+
+.edit_element .form_field_group .form_field.hidden {
+    display: none;
+}
+
+.edit_element .form_field_group .form_field.not_found {
+    border-bottom: 1px solid red;
+    background: #ff00002a;
+}
+
+.edit_element .form_field_group .form_field input {
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.edit_element .form_field_group .form_field p {
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+    border: none;
+}
+
+.edit_element .form_field_group .form_field .update_preview_png {
+    width: 175px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.edit_element .form_field_group .form_field .update_preview_mp3 {
+    width: 75px;
+    height: 75px;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+    border-radius: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../../imgs/repeat.png);
+}
+
+.delete_element .delete_content {
+    width: 70%;
+    text-align: center;
+    margin: 125px auto;
+    padding: 20px;
+    background: #00000070;
+    border-radius: 15px;
+    font-size: 32px;
+    color: white;
+}
+
+.delete_element .delete_content {
+    width: 70%;
+    text-align: center;
+    margin: 320px auto;
+    padding: 20px;
+    background: #00000070;
+    border-radius: 15px;
+    font-size: 32px;
+    color: white;
+}
+
+.delete_element .selection {
+    width: 50%;
+    text-align: center;
+    margin: 11px auto;
+    display: table;
+    table-layout: fixed;
+}
+
+.delete_element .delete_answer {
+    border: 1px solid white;
+    display: table-cell;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.delete_element .delete_preview_png {
+    max-width: 350px;
+    border-radius: 10px;
+}
+
+.delete_element .delete_answer[answer="1"] {
+    background: #F44336;
+}
+
+.delete_element .delete_answer[answer="0"] {
+    background: #545454;
+}
+
+input.invalid {
+    border: 1px solid #F44336;
+}
+
+.allgames, .alltables {
+    width: 100%;
+    height: 100%;
+}
+
+.game_container, .table_container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 150px);
+}
+/* table */
+
+.zoo_table {
+    width: 100%;
+}
+
+.zoo_table img {
+    width: 150px;
+    display: block;
+    border-radius: 15px;
+    margin: 0 auto;
+    transition: .5s;
+}
+
+.zoo_table img:hover {
+    width: 175px;
+}
+
+.zoo_table .fa-trash {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    font-size: 20px;
+    color: #F44336;
+    background: white;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 15px;
+    transition: .5s;
+}
+
+.zoo_table .fa-refresh {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    font-size: 20px;
+    color: #FFEB3B;
+    background: white;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 15px;
+    transition: .5s;
+}
+.points.fa.fa-refresh::before{
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    color: rgb(233, 99, 10);
+    background: white;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 15px;
+    transition: .5s;
+    margin: 120px auto;
+    top: 1px;
+    left: 190px;
+    position: absolute;
+}
+.zoo_table .fa-trash:hover {
+    padding: 10px;
+    font-size: 24px;
+    border: 3px solid #F44336;
+}
+
+.zoo_table .change_animal_name {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0 10px;
+    background: #00ffd41c;
+}
+
+.preview_model .play {
+    position: relative;
+    width: 125px;
+    height: 100px;
+    padding: 0;
+    margin: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.animal, .homes {
+    margin-top: 1px;
+    margin-left: 1px;
+    border-radius: 40px;
+    height: 350px;
+    text-align: center;
+}
+
+.animal1 {
+    border-radius: 40px;
+    max-height: 250px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.cont {
+    margin: 0;
+    text-align: center;
+    height: 100%;
+}
+
+.sons, .homes, .sounds {    
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 75px;
+}
+
+.sons .son {
+    width: 15vw;
+    height: 15vw;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.homes .home {
+    width: 15vw;
+    height: 15vw;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.sounds .sound {
+    width: 15vw;
+    height: 15vw;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.sons .son img,
+.homes .home img,
+.sounds .sound img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    /*transition: .25s;*/
+}
+
+.sons .son img:hover,
+.homes .home img:hover,
+.sounds .sound img:hover {
+    border: 2px solid #b1cb61;
+}
+
+.closediv {
+    float: right;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+.loading {
+    top: 0;
+    left: 0;
+    z-index: 150;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../../imgs/start.gif);
+}
+
+.preview_model {
+    top: 20%;
+    left: 25%;
+    align-self: center;
+    width: 50%;
+    height: 70%;
+    position: fixed;
+    display: none;
+    text-align: center;
+}
+
+.preview_model .main {
+    width: 100%;
+    height: calc(100% - 15%);
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.preview_model .hide {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.soundGameImg,.simonGameImg{
+    width: 45%;
+    height: 125%;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 850px) {
+    .animal{
+        height: 240px;
+    }
+    .home{
+        height: 240px;
+    }
+    .little{
+        height: 240px;
+    }
+  }
+
+.animal_games,
+.animal_tables {
+    text-align: center;
+    height: 100%;
+}
+
+.animalimgGame {
+    display: none;
+}
+
+.animalgameinner[game="memory"] {
+    margin: 0 auto;
+}
+
+.animalgameinner[game="sound"] {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.animalgameinner2 {
+    padding: 20px;
+    grid-gap: 5px;
+    position: absolute;
+    top: 30%;
+}
+
+.trainimg {
+    z-index: 11;
+    position: fixed;
+    width: 80%;
+    top: 60%;
+    left: 100%;
+    max-width: 400px;
+    /* display: none; */
+}
+
+.animal_games img,
+.animal_tables img {
+    background: white;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.animal_games img {
+    width: 15vw;
+    height: 15vw;
+    margin: 28px 10px 15px;
+}
+
+.animal_tables img {
+    width: 25vw;
+    height: 25vw;
+    margin: 150px 10px;
+}
+
+.animal_games img:hover,
+.animal_tables img:hover {
+    border: 2px solid #b76f6f;
+}
+
+.nextlevel1,
+.repeatlevel {
+    width: 75px;
+    height: 75px;
+    margin: 0 15px;
+}
+
+.cover {
+    display: none;
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    background-color: lightgreen;
+    border-radius: 10%;
+    padding: 5%;
+    border: 5px;
+    border-style: outset;
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+}
+
+.text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    list-style: none;
+    /* border-bottom: 0; */
+    z-index: 101;
+    display: none;
+    width: 50%;
+    border-width: 0;
+}
+
+.text li {
+    display: inline-block;
+    float: left;
+    font-weight: 700;
+    font-size: 2em;
+    color: lightblue;
+    opacity: 1;
+    transition: all 1.5s ease-in-out;
+    max-width: 2em;
+}
+
+.text.hidden li.spaced {
+    padding-left: 0;
+}
+
+.text li.spaced {
+    padding-left: 0.5em;
+}
+
+.text.hidden li.ghost {
+    opacity: 0;
+    max-width: 0;
+}
+
+.smallfont {
+    color: red;
+    font-size: 5px;
+}
+
+.startimg {
+    width: 100%;
+    height: 100%;
+}
+
+.hand {
+    z-index: 11;
+    position: fixed;
+    width: 80%;
+    top: 60%;
+    left: 100%;
+}
+
+.resound,.resound1,
+.nextlevel,
+.prevlevel {
+    width: 50px;
+    height: 50px;
+}
+
+.prevlevel {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+.animalTo, .animalHome{
+    width: 329px;
+    height: 324px;
+    border-radius: 10%;
+    border-style: solid;
+    margin-top: 2px;
+    max-width: 500px;
+    max-height: 400px;
+}
+
+span {
+    margin-right: 1%;
+    color: black;
+}
+
+.congratz {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.congratz.sad {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 20%;
+}
+
+@keyframes bg {
+    0% { background-size: 0 3px, 3px 0, 0 3px, 3px 0; }
+    25% { background-size: 100% 3px, 3px 0, 0 3px, 3px 0; }
+    50% { background-size: 100% 3px, 3px 100%, 0 3px, 3px 0; }
+    75% { background-size: 100% 3px, 3px 100%, 100% 3px, 3px 0; }
+    100% { background-size: 100% 3px, 3px 100%, 100% 3px, 3px 100%; }
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+    border: none;
+    background: #ccc;
+    padding: 3px 10px;
+    border-radius: 10px;
+}

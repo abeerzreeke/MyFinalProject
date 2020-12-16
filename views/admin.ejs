@@ -1,0 +1,659 @@
+<div class="signIn">
+    <form class="contact-form">
+            <img class="abeer" src="./images/abeer.jpg" />
+        <p>*Username :</p>
+        <input id="username" type="text" name="username" required  maxlength="15" placeholder="Enter User Name">
+        <p>*Password :</p>
+        <input id="password" type="password" name="password" placeholder="Enter password" required maxlength="15">
+        <p class="toggle_password">Show/Hide Password</p>
+        <button type="submit" onclick="signIn(event)">Sign In</button>
+    </form>
+</div>
+
+<div id="wrong_password" class="modal">
+    <h3>please Check The Username And The Password</h3>
+</div>
+
+<div class="permissions">
+    <div class="form-row">
+        <ul class="methods_ul">
+            <li class="create_method"><a href="#create_method" data-toggle="collapse">Create</a></li>
+            <li class="update_method"><a href="#update_method" data-toggle="collapse">Update</a></li>
+        </ul>
+        <div class="accordion">
+            <form class="method collapse show" data-parent=".accordion" id="create_method" action="http://localhost:8888/admin/create/" enctype="multipart/form-data" method="POST">
+                <p>Select a table</p>
+                <select class="path_to_save" name="table">
+                    <option value="animals">Animals</option>
+                    <option value="profiles">Profiles</option>
+                </select>
+                <div class="form_field">
+                    <p>ID:</p>
+                    <input type="text" name="id">
+                </div>
+                <div class="form_field">
+                    <p>Name:</p>
+                    <input type="text" name="name">
+                </div>
+                <div class="form_field_group" relevant="animals">
+                    <div class="form_field">
+                        <p>Photo:</p>
+                        <input type="file" name="photo">
+                    </div>
+                    <div class="form_field">
+                        <p>Real:</p>
+                        <input type="file" name="real">
+                    </div>
+                    <div class="form_field">
+                        <p>Arabic Sound:</p>
+                        <input type="file" name="ar_sound">
+                    </div>
+                    <div class="form_field">
+                        <p>Hebrow Sound:</p>
+                        <input type="file" name="he_sound">
+                    </div>
+                    <div class="form_field">
+                        <p>Animal Sound:</p>
+                        <input type="file" name="sound">
+                    </div>
+                    <div class="form_field">
+                        <p>Home:</p>
+                        <input type="file" name="home">
+                    </div>
+                    <div class="form_field">
+                        <p>Arabic home name:</p>
+                        <input type="file" name="ar_home_name">
+                    </div>
+                    <div class="form_field">
+                        <p>Hebrew home name:</p>
+                        <input type="file" name="he_home_name">
+                    </div>
+                    <div class="form_field">
+                        <p>Son:</p>
+                        <input type="file" name="son">
+                    </div>
+                    <div class="form_field">
+                        <p>Son arabic name:</p>
+                        <input type="file" name="ar_son_name">
+                    </div>
+                    <div class="form_field">
+                        <p>Son hebrew name:</p>
+                        <input type="file" name="he_son_name">
+                    </div>
+                </div>
+                <div class="form_field_group" relevant="profiles">
+                    <div class="form_field">
+                        <p>Profile Photo:</p>
+                        <input type="file" name="profiles">
+                    </div>
+                </div>
+                <div class="form_field">
+                <input class="insert"  type="submit" value="Insert" />
+                </div>
+            </form>
+            <div class="method collapse" data-parent=".accordion" id="update_method">
+                <div class="form_field">
+                    <p>Select a table</p>
+                    <select id="collection_update">
+                        <option value="animals">Animals</option>
+                        <option value="profiles">Profiles</option>
+                    </select>
+                </div>
+                <div class="table_field form_field" relevant="animals">
+                    <p>Table:</p>
+                    <div class="ui-widget">
+                        <label for="jump_to">Jump to:</label>
+                        <input id="jump_to" />
+                    </div>                    
+                    <table class="table zoo_table">
+                        <thead>
+                            <tr>
+                                <th width="50px">ID</th>
+                                <th width="150px">Name</th>
+                                <th style="text-align: center;">Picture</th>
+                                <th width="50px">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table_field form_field" relevant="profiles">
+                    <p>Table:</p>
+                    <table class="table zoo_table">
+                        <thead>
+                            <tr>
+                                <th width="50px">ID</th>
+                                <th width="150px">Name</th>
+                                <th style="text-align: center;">Picture</th>
+                                <th width="50px">Reset</th>
+                                <th width="50px">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form_field">
+                    <input class="update" type="submit" value="Update" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form 
+    class="edit_element" 
+    id="edit_element" 
+    action="http://localhost:8888/admin/update/" 
+    enctype="multipart/form-data" 
+    method="POST" 
+    element="" 
+    element_id="" 
+    element_name=""
+    >
+    <div class="close">
+        <span>X</span>
+    </div>
+    <div class="form_field_group" relevant="element">
+    </div>
+</form>
+
+<form 
+    class="delete_element" 
+    id="delete_element" 
+    element="" 
+    element_id="" 
+    element_name=""
+    >
+</form>
+
+<script>
+
+    var animals_names = [];
+    
+    $(document).ready(function() { 
+        $( "#wrong_password" ).dialog({ 
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                Ok: function() {
+                    $(this).dialog("close");
+                } 
+            }
+        });
+        var token = localStorage.getItem("token");
+        token && login();
+    });
+
+    function login() {
+        $('.signIn').hide();
+        $('.permissions').show();
+        $('.path_to_save').change();
+        $(".signIn button").css("background", "#8bc34a").css("color", "#fff");
+    }
+    // signin admin
+    function signIn(e) {
+        e.preventDefault();
+        const username = $("#username").val();
+        const password = $("#password").val();
+
+        //checks if the database object exists
+        if(!username || !password) { return alert("please insert Username and Password !"); } 
+
+        $.ajax({
+            url: "http://localhost:8888/admin",
+            method: 'POST',
+            data: { "username": username, "password": password },
+            dataType: 'json',
+            success: function(data) {
+                if(data.result == "1") {
+                    login();
+                    localStorage.setItem("token", true);
+                } else {
+                    $(".signIn button").css("background", "#f44336");
+                    $(".signIn button").css("color", "#ffffff");
+                    $( "#wrong_password" ).dialog("open");
+                    $("#wrong_password").siblings(".ui-dialog-titlebar").remove();
+                }
+            }
+        });
+    }
+    
+    //Build a table of a animal or profails
+    function init_table(data, table) {
+        $(".table_field").hide();
+        $(".table_field[relevant='" + table + "']").show();
+        $(".table_field[relevant='" + table + "'] .zoo_table tbody").html("");
+        
+
+        if(table == "animals") { 
+            
+            animals_names = data.map( animal => { return animal.name });
+            // jump to the searching animal 
+            $("#jump_to").autocomplete({
+                source: animals_names,
+                select: function( event, ui ) {
+                    scroll_to_animal(ui.item.label);
+                    return false;
+                }
+            });
+            //The order of the animals within a table
+            data.forEach(animal => {
+                if(!animal.id) {
+                    animal.id = "";
+                    animal.name = "";
+                }
+                $(".table_field[relevant='" + table + "'] .zoo_table tbody").append(`
+                    <tr class="open_element_dialog" element="animal" element_id="${ animal.id }" element_name="${ animal.name }">
+                        <td>${ animal.id }</td>
+                        <td><div class="change_animal_name" animal_id="${ animal.id }" mode="view">${ animal.name }</div></td>
+                        <td><img src="uploads/photo/${ animal.id }-${  animal.name }.png" /></td>
+                        <td></td>
+                        <td><i element_id="${ animal.id }" class="fa fa-trash"></i></td>
+                    </tr>
+                `);
+            });
+            //sorted the ID Animals increasingly
+            var $table = $('.zoo_table');
+            var rows = $table.find('tr').get();
+            rows.sort(function(a, b) {
+                var keyA = parseInt($(a).attr('element_id'));
+                var keyB = parseInt($(b).attr('element_id'));
+                if (keyA < keyB) return 1;
+                if (keyA > keyB) return -1;
+                return 0;
+            });
+            $.each(rows, function(index, row) {
+                $table.children('tbody').prepend(row);
+            });
+        //Bulid a profile table
+        } else {
+            data.forEach(profile => {
+                if(!profile.id) {
+                    profile.id = "";
+                    profile.name = "";
+                }
+                $(".table_field[relevant='" + table + "'] .zoo_table tbody").append(`
+                    <tr class="open_element_dialog" element="profile" element_id="${ profile.id }">
+                        <td>${ profile.id }</td>
+                        <td><div class="change_profile_name" profile_id="${ profile.id }" mode="view">${ profile.name }</div></td>
+                        <td><img src="uploads/profiles/${ profile.id }-${  profile.name }.png" /></td>
+                        <td><i element_id="${ profile.id }" class="fa fa-refresh"></i></td>
+                        <td><i element_id="${ profile.id }" class="fa fa-trash"></i></td>
+                    </tr>
+                `);
+            });
+        }
+    }
+
+    //Fill the select with the animals options
+    function create_delete_section(item) {
+        $("#delete_select").prepend(`<option value="${ item["id"] }">${ item["name"] }</option>`);
+    }
+    //The data of a animals 
+    function open_element_dialog(element) {
+        var type = $(element).attr('element');
+        var id = $(element).attr('element_id');
+        var name = $(element).attr('element_name');
+        var t_element = { "id": id, "name": name };
+        $(".edit_element").attr('element', type);
+        $(".edit_element").attr('element_id', id);
+        $(".edit_element").attr('element_name', name);
+
+        var animal_data = [ 
+            {
+                "name": "ID",
+                "file": "id",
+                "readonly": "true",
+                "format": "text" 
+            }, {
+                "name": "Name",
+                "file": "name",
+                "format": "text" 
+            }, {
+                "name": "Photo",
+                "file": "photo",
+                "format": "png" 
+            }, {
+                "name": "Real photo",
+                "file": "real",
+                "format": "png" 
+            }, {
+                "name": "Arabic name voice",
+                "file": "ar_sound",
+                "format": "mp3" 
+            }, {
+                "name": "Hebrew name voice",
+                "file": "he_sound",
+                "format": "mp3" 
+            }, {
+                "name": "Sound",
+                "file": "sound",
+                "format": "mp3" 
+            }, {
+                "name": "Home",
+                "file": "home",
+                "format": "png" 
+            }, {
+                "name": "Arabic home name",
+                "file": "ar_home_name",
+                "format": "png" 
+            }, {
+                "name": "Hebrew home name",
+                "file": "he_home_name",
+                "format": "png" 
+            }, {
+                "name": "Son photo",
+                "file": "son",
+                "format": "png" 
+            }, {
+                "name": "Arabic son name voice",
+                "file": "ar_son_name",
+                "format": "mp3" 
+            }, {
+                "name": "Hebrew son name voice",
+                "file": "he_son_name",
+                "format": "mp3" 
+            }
+        ];
+
+        $(".edit_element .form_field_group").html(`
+            <div class="form_field hidden">
+                <p>table:</p>
+                <input type="text" name="table" value="${ type }s">
+            </div>
+            <div class="form_field ssubmit">
+                <input class="update" type="submit" value="Update" />
+            </div>
+        `);
+        //update animal
+        if(type == "animal") { 
+            $.each(animal_data, (index, data) => {
+                if(data["format"] == "text") { //update txt for a name of animal
+                    $(".edit_element .form_field_group").prepend(`
+                        <div class="form_field">
+                            <p>${ data["name"] }:</p>
+                            <input type="text" name="${ data["file"] }" value="${ t_element[data["file"]] }" ${ data["readonly"] ? "readonly": "" }>
+                        </div>
+                    `);
+                } else if(data["format"] == "png") { //update image  of animal
+                    $.ajax({
+                        url: `http://localhost:8888/uploads/${ data['file'] }/${ t_element['id'] }-${ t_element['name'] }.png`,
+                        success: e => {
+                            $(".edit_element .form_field_group").prepend(`
+                                <div class="form_field">
+                                    <img 
+                                        class="update_preview_png" 
+                                        src="uploads/${ data["file"] }/${ id }-${ name }.png" 
+                                        />
+                                    <p>${ data["name"] }:</p>
+                                    <input type="file" name="${ data["file"] }">
+                                </div>
+                            `);
+                        }, 
+                        error: e => {
+                            $(".edit_element .form_field_group").prepend(`
+                                <div class="form_field not_found">
+                                    <p>${ data["name"] }:</p>
+                                    <input type="file" name="${ data["file"] }">
+                                </div>
+                            `);
+                        }
+                    });
+                } else if(data["format"] == "mp3") { //update sound of animal
+                    $.ajax({
+                        url: `http://localhost:8888/uploads/${ data['file'] }/${ t_element['id'] }-${ t_element['name'] }.mp3`,
+                        success: e => {
+                            $(".edit_element .form_field_group").prepend(`
+                                <div class="form_field">
+                                    <img 
+                                        class="update_preview_mp3 play_voice" 
+                                        voice_src="uploads/${ data["file"] }/${ id }-${ name }.mp3" 
+                                        />
+                                    <p>${ data["name"] }:</p>
+                                    <input type="file" name="${ data["file"] }">
+                                </div>
+                            `);
+                        }, 
+                        error: e => {
+                            $(".edit_element .form_field_group").prepend(`
+                                <div class="form_field not_found">
+                                    <p>${ data["name"] }:</p>
+                                    <input type="file" name="${ data["file"] }">
+                                </div>
+                            `);
+                        }
+                    });
+                } 
+            });
+            $(".edit_element").show();
+        }
+    }
+    //window before deletion to confirm request
+    function open_delete_element_dialog(type, id, name) {
+        $(".delete_element").html(`
+            <div class="close"><span>X</span></div>
+            <div class="delete_content">
+                <p>Are you sure do you want to delete ${ name } ?</p>	
+                <img class="delete_preview_png" src="uploads/${ type == "animal" ? "photo": "profiles" }/${ id }-${ name }.png" />
+                <div class="selection">
+                    <div class="delete_answer" answer="1">Yes</div>
+                    <div class="delete_answer" answer="0">No</div>
+                </div>
+            </div>
+        `);
+        $(".delete_element").attr('element', type);
+        $(".delete_element").attr('element_id', id);
+        $(".delete_element").attr('element_name', name);
+        $(".delete_element").show();
+    }
+
+    // Request to the server to update a record that assign to an animal in database
+    $('#edit_element').on("submit", function(e) {
+        var formData = new FormData(this);
+        $.ajax({
+            url: $(this).attr("action"),
+            type: 'POST',
+            data: formData,
+            success: function (results) {
+                console.log(results)
+                if(results['error']) { return }
+                $('#edit_element')[0].reset();
+                $("#collection_update").change();
+                $('#edit_element .close').click();
+                $('.open_element_dialog[element="animal"][element_id="' + formData.id + '"]').click();
+            },
+            error: function(error) {
+                console.log(error)
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    });
+
+    //First request to the server to open a record that assign to animal in database
+    $('#edit_element .close, #delete_element .close').on("click", function(e) {
+        $(".edit_element, #delete_element").hide();
+    });
+
+    $(document).on("change", ".permissions input[name='id']", function(e) {
+        animals_ids = animals.map( animal => { return animal.id });
+        if(animals_ids.includes($(this).val())) {
+            $(this).addClass("invalid");
+        } else {
+            $(this).removeClass("invalid");
+        }
+    });
+
+    $(document).on("change", ".permissions input[name='name']", function(e) {
+        animals_names = animals.map( animal => { return animal.name });
+        if(animals_names.includes($(this).val())) {
+            $(this).addClass("invalid");
+        } else {
+            $(this).removeClass("invalid");
+        }
+    });
+    //First request to the server to open a record that assign to animal in database
+    $('#create_method').on("submit", function(e) {
+        var invalid = false;
+        if($(this).find("input[name='id']").val() == "") {
+           $(this).find("input[name='id']").addClass("invalid");
+           invalid = true; 
+        } else {
+            $(this).find("input[name='id']").removeClass("invalid");
+        }
+        if($(this).find("input[name='name']").val() == "") {
+           $(this).find("input[name='name']").addClass("invalid");
+           invalid = true; 
+        } else {
+            $(this).find("input[name='name']").removeClass("invalid");
+        }
+        if($(".path_to_save").val() == "profiles") {
+            if($(this).find("input[name='profiles']").val() == "") {
+            $(this).find("input[name='profiles']").addClass("invalid");
+            invalid = true; 
+            } else {
+                $(this).find("input[name='profiles']").removeClass("invalid");
+            }
+        } else {
+            if($(this).find("input[name='photo']").val() == "") {
+            $(this).find("input[name='photo']").addClass("invalid");
+            invalid = true; 
+            } else {
+                $(this).find("input[name='photo']").removeClass("invalid");
+            }
+        }
+        if(invalid) { 
+            $("#create_method")[0].scrollTop = 0;
+            return false; 
+        }
+
+
+        var formData = new FormData(this);
+        $.ajax({
+            url: $(this).attr("action"),
+            type: 'POST',
+            data: formData,
+            success: function (results) {
+                if(results['error']) { return }
+                $('#create_method')[0].reset();
+                $(".update_method a").click();
+            },
+            error: function(error) {
+                console.log(error)
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    });
+
+    //add profile
+    $("#AddProfile").on("click", function() {
+        var formData = new FormData($(this).closest("form")[0]);
+        $.ajax({
+            url: "http://localhost:8888/profiles",
+            type: 'POST',
+            data: formData,
+            success: function (results) {
+                if(results['error']) { return }
+                $('#create_method')[0].reset();
+                get_profiles();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        return false;
+    });
+
+    //Show the animals in the preview section before update
+    $('.update_method').on('click', function() {
+        $("#collection_update").change();
+    });
+
+    // Remove animal from table view
+    $(document).on('click', '.zoo_table .fa-trash', function() {
+        var $tr = $(this).closest("tr");
+        var type = $tr.attr('element');
+        var id = $tr.attr('element_id');
+        var name = $tr.attr('element_name');
+        open_delete_element_dialog(type, id, name);
+    });
+    //to cleaned the points
+    $(document).on('click', '.zoo_table .fa-refresh', function() {
+        var id = $(this).attr("element_id");
+        var points = 0;
+        var games_points = { "games": { "memory": { "current": 2, "max": 2 }, "sound": { "current": 1, "max": 1 }, "home": { "current": 1, "max": 1 }, "real": { "current": 1, "max": 1 }, "son": { "current": 1, "max": 1 }, "simon": { "current": 1, "max": 1 } } };
+        $.ajax({
+            url: "http://localhost:8888/profiles_points/" + id + "/" + points,
+            dataType: 'json',
+            data: games_points,
+            method: "POST",
+            success: (data) => { 
+                alert("Profile was been cleaned/reseted")
+            },
+            error: (error) => { console.log(error) }
+        });
+    });
+    //if selcted yes [answer=1] to remove a animal
+    $(document).on('click', '.delete_element .delete_answer[answer="1"]', function() {
+        var table_name = $(this).closest(".delete_element").attr("element");
+        var element_id = $(this).closest(".delete_element").attr("element_id");
+        $.ajax({
+            url: "http://localhost:8888/table/" + table_name + 's/' + element_id,
+            method: 'DELETE',
+            dataType: 'json',
+            success: function(data) {
+                $(".edit_element, #delete_element").hide();
+                $('.update_method').click();
+            }
+        });
+    });
+    //if selcted yes [answer=0] hide a window
+    $(document).on('click', '.delete_element .delete_answer[answer="0"]', function() {
+        $(".edit_element, #delete_element").hide();
+    });
+
+    // TODO WRITE COMMENTS
+    $(document).on('click', '.open_element_dialog', function(e) {
+        if($(e.target).hasClass("fa-trash")) { return; }
+        open_element_dialog(this);
+    });
+
+    //Show the animals in the preview section before delete
+    $('.delete_method').on('click', function() {
+        $("#collection_delete").change();
+    });
+
+    // Change the form according to the selected table
+    $('.path_to_save').on("change", function() {
+        $('.form_field_group').hide();
+        $(`.form_field_group[relevant="element"], .form_field_group[relevant="${ $(this).val() }"]`).show();
+    });
+
+    //selcted to update Animal or profails
+    $("#collection_update").on('change', function() {
+        var table_name = $("#collection_update").val();
+        $.ajax({
+            url: "http://localhost:8888/table/" + table_name,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                animals = data['result'];
+                init_table(data['result'], table_name);
+            }
+        });
+    });
+
+    //add new animal in end 
+    function scroll_to_animal(animal) {
+        var animal = $(".open_element_dialog:contains('" + animal + "'):eq(0):last")[0];
+        $('#update_method').scrollTop(animal.offsetTop)
+    }
+
+</script>

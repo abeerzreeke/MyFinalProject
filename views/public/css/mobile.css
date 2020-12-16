@@ -1,0 +1,78 @@
+.mobile .app_header {
+    height: 80px;
+    width: 99%;
+    padding: 0 5px;
+    margin: 5px auto;
+    border-radius: 5px;
+}
+
+.mobile .app_header .back img {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    padding: 0;
+}
+
+.mobile .app_header .back {
+    width: 75px;
+    height: 75px;
+}
+
+.mobile .app_header .profile {
+    width: 75px;
+    height: 75px;
+}
+
+.mobile .app_header .profile img {
+    width: 60px;
+    height: 60px;
+    border: 1px solid;
+    margin: 10px;
+    padding: 0;
+}
+
+.mobile .app_header .profile .profile_points {
+    font-size: 11px;
+    margin: -11px 0;
+}
+
+.mobile .app_header .profile .profile_points:before {
+    top: 5px;
+    left: 10px;
+}
+
+.mobile .app_header .admin {
+    width: 75px;
+    height: 75px;
+}
+
+.mobile .app_header .admin img {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    padding: 5px;
+}
+.mobile .app_header .main  {
+    width: 75px;
+    height: 75px;
+  
+}
+.mobile .app_header .main img {
+    width: 100px;
+    height: 80px;
+    padding: 5px;
+    margin-left: 114px;
+
+}
+
+.mobile .functions .function {
+    position: absolute;
+    z-index: 9;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    background: #ffffffc9;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+}

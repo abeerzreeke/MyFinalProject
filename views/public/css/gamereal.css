@@ -1,0 +1,198 @@
+.animalgameinner[game="real"] {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .animalgameinner[game="real"] .header {
+      display: inline-block;
+    width: 100%;
+  }
+  
+  .animalgameinner[game="real"] .content {
+      display: inline-block;
+    width: 100%;
+  }
+  
+  .animalgameinner[game="real"] .title {
+      float: left;
+      font-size: 24px;
+      margin: 25px 100px;
+  }
+  
+  .animalgameinner[game="real"] .animals {
+      position: absolute;
+      width: 50%;
+      margin: 25px 25%;
+      text-align: center;
+      display: table;
+      table-layout: fixed;
+  }
+  
+  .animalgameinner[game="real"] .animals span {
+      display: table-cell;
+      border: 1px solid white;
+      font-size: 20px; 
+  }
+  
+  .animalgameinner[game="real"] .animals span.available {
+      background: #bd3232;
+  }
+  
+  .animalgameinner[game="real"] .animals span.notavailable {
+      background: #32bd51;
+  }
+  
+  .animalgameinner[game="real"] .score {
+      float: right;
+      font-size: 24px;
+      margin: 25px 100px;
+  }
+  
+  .animalgameinner[game="real"] .chances {
+      float: right;
+      font-size: 50px;
+      margin: 0 25px;
+      color: #bd3232;
+      border-bottom: 2px solid;
+  }
+  
+  .animalgameinner[game="real"] .question {
+      width: 75%;
+      margin: 0 auto;
+      max-height: 450px;
+      overflow-y: auto;
+  }
+  
+  .animalgameinner[game="real"] .question p {
+      text-align: center;
+      font-size: 32px;
+      letter-spacing: 3px;
+  }
+  
+  .animalgameinner[game="real"] .question p span {
+      background: #ccc;
+      font-weight: 600;
+  }
+  
+  .animalgameinner[game="real"] .question img {
+      width: 20%;
+      margin: 0 40%;
+      border-radius: 15px;
+      border: 2px solid #b76f6f;
+  }
+  
+  .animalgameinner[game="real"] .answers {
+      width: 75%;
+      margin: 15px auto;
+      text-align: center;
+      padding: 5px 25px;
+      border-top: 2px solid #b76f6f;
+  }
+  
+  .animalgameinner[game="real"] .answers img {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 10px;
+      border-radius: 15px;
+      cursor: pointer;
+      padding: 15px;
+      background: white;
+  }
+  
+  .animalgameinner[game="real"] .answers .answer.selected {
+      background: #bd3232;
+  }
+  
+  .animalgameinner[game="real"] .answers img:hover {
+      border: 3px solid #bd3232;
+  }
+  
+  
+  /* LOADING CSS */
+  .lds-roller {
+    display: none;
+    margin: 0 auto;
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 32px 32px;
+  }
+  .lds-roller div:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #f00;
+      margin: -5px 0 0 -5px;
+  }
+  .lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+  }
+  .lds-roller div:nth-child(1):after {
+    top: 50px;
+    left: 50px;
+  }
+  .lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+  }
+  .lds-roller div:nth-child(2):after {
+    top: 54px;
+    left: 45px;
+  }
+  .lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+  }
+  .lds-roller div:nth-child(3):after {
+    top: 57px;
+    left: 39px;
+  }
+  .lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+  }
+  .lds-roller div:nth-child(4):after {
+    top: 58px;
+    left: 32px;
+  }
+  .lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+  }
+  .lds-roller div:nth-child(5):after {
+    top: 57px;
+    left: 25px;
+  }
+  .lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+  }
+  .lds-roller div:nth-child(6):after {
+    top: 54px;
+    left: 19px;
+  }
+  .lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+  }
+  .lds-roller div:nth-child(7):after {
+    top: 50px;
+    left: 14px;
+  }
+  .lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+  }
+  .lds-roller div:nth-child(8):after {
+    top: 45px;
+    left: 10px;
+  }
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

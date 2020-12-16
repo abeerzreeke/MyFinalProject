@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Animals</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/bootstrap-grid.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/bootstrap-reboot.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/css.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./fonts/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/game.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/gameson.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/gamereal.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/toastr.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/mobile.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./public/css/gridstack.css" />
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="./public/bootstrap/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="./public/bootstrap/bootstrap.bundle.js"></script>
+    <script src="./public/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./public/bootstrap/bootstrap.js"></script>
+    <script src="./public/bootstrap/bootstrap.min.js"></script>
+    <script src="./public/js/gridstack.js"></script>
+    <script src="./public/js/confetti.min.js"></script>
+    <script src="./public/js/howler.core.js"></script>
+
+
+    <script src="./public/js/js.js"></script>
+
+    <script src="./public/js/animals_home.js"></script>
+    <script src="./public/js/animals_son.js"></script>
+    <script src="./public/js/animals_sound.js"></script>
+    
+    <script src="./public/js/memory_game.js"></script>
+    <script src="./public/js/sound_game.js"></script>
+    <script src="./public/js/home_game.js"></script>
+    <script src="./public/js/real_game.js"></script>
+    <script src="./public/js/son_game.js"></script>
+    <script src="./public/js/simon_game.js"></script>
+    
+</head>
+
+<body class="zoo-bg">
+
+    <div class="app_header">
+        <a class="back play_voice_method" voice_src="./sound/games/backToGames.mp4">
+            <img back-to="games" src="./imgs/toyspage.jpg" />
+        </a>
+        <a class="back play_voice_method" voice_src="./sound/games/backToLearn.mp4">
+            <img back-to="tables" src="./imgs/table.jpg" />
+        </a>
+        <a class="profile play_voice_method" voice_src="./sound/games/profile.mp4"> 
+            <img class="" src="./imgs/manager.png" />
+            <div class="points_progress"></div> 
+            <div id="reset_current_profile" class="fa fa-refresh"></div>
+            <p class="profile_points"> 
+                0
+            </p>
+        </a>
+        <a href="/" class="main play_voice_method" voice_src="./sound/games/backToHome.mp4">
+            <img src="./imgs/train.png" />
+        </a>
+        <a href="/admin" class="admin play_voice_method" voice_src="./sound/games/admin.mp4">
+            <img src="./imgs/manager.png">
+        </a>
+    </div>
+    
+
+    <div class="app_content">
+        <%- body %>
+    </div>
+
+    <div class="profile_images">
+        <div class="closediv"><i class="fa fa-close"></i></div>
+        <div class="album">
+        </div>
+    </div>
+
+    <img class="trainimg" src="./imgs/train.png" />
+
+    <canvas id="my-canvas"></canvas>
+
+
+</body>
+</html>
