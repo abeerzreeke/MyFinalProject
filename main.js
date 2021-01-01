@@ -48,9 +48,9 @@ var uploads_update = multer({ storage: storage_update }).any();
 var db_zoo;
 
 //Connect to mongodb to detect if there is an error, raise an exception
-MongoClient.connect("mongodb://localhost:27017/", { native_parser: true }, (err, db) => {
+MongoClient.connect("mongodb://localhost:27017/", { native_parser: true }, (err, databases) => {
 	if (err) throw err;
-	db_zoo = db.db("zoo");
+	db_zoo = databases.db("zoo");
 });
 
 app.set('views', path.join(__dirname, 'views'));
